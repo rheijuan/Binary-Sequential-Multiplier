@@ -124,29 +124,57 @@ public class SequentialMultiplier {
 	}
 
 	public static void performOperation(String a, String m, String mneg, String q, String qneg){
-		StringBuilder builder = new StringBuilder();
 		for(int i = 0; i < q.length(); i++) {
+			StringBuilder builder = new StringBuilder(q);
 			if (q.charAt(q.length() - 1) == '1') { // get the last character of q and check if it is 1
-				System.out.println("q 1");
 				if (qneg.charAt(0) == '0') {
-					System.out.println("qneg 0");
 					a = add(a, mneg);
 				}
 			}
 			else {
-				System.out.println("q 0");
 				if (qneg.charAt(0) == '1') {
-					System.out.println("qneg 1");
 					a = add(a, m);
 				}
 			}
+
 			//Arithmetic Shift Right algo
+			//qneg will take the last character of Q
 			qneg = Character.toString(q.charAt(q.length() - 1));
 
-            /*System.out.println("Iteration " + (i+1));
-            System.out.print("A: " + a);
-            System.out.print(" Q: " + q);
-            System.out.println(" Q-1:" + qneg);*/
+			//shift all bits of q to the right
+			for (int j = q.length() - 1; j >= 1; j--){
+				builder.setCharAt(j, q.charAt(j-1));
+			}
+
+			//first character of q will take last character of a
+			builder.setCharAt(0, a.charAt(a.length() - 1));
+
+			// q will be replaced with the new string
+			q = builder.toString();
+
+			//builder will now have the string in a
+			builder = new StringBuilder(a);
+
+			//shift all bits of a to the right
+			for (int j = a.length() - 1; j >= 1; j--){
+				builder.setCharAt(j, a.charAt(j-1));
+			}
+
+			// first character of a will take whatever is next to it
+			builder.setCharAt(0, builder.charAt(1));
+
+			// let a take the new string
+			a = builder.toString();
+
+			// display results for this iteration
+			System.out.println("Loop " + (i+1));
+			System.out.print("A: " + a);
+			System.out.print(" Q: " + q);
+			System.out.println(" Q-1: " + qneg);
+		}
+
+		//display final result
+		System.out.println("Final result: " + a + q);
 		}
 	}
 }
