@@ -73,57 +73,69 @@ public class SequentialMultiplier {
 	}
 
 	public static String add(String a, String m){
-		String carry = "0";
-		StringBuilder builder = new StringBuilder(a);
+        String carry = "0";
+        StringBuilder builder = new StringBuilder(a);
 
-		for (int i = a.length() - 1; i >= 0; i--){
-			// if i-th bit of a is 1
-			if (a.charAt(i) == '1'){
+        for (int i = a.length() - 1; i >= 0; i--){
+            // if i-th bit of a is 1
+            if (a.charAt(i) == '1'){
 
-				// if i-th bit of m is 1
-				if (m.charAt(i) == '1') {
+                // if i-th bit of m is 1
+                if (m.charAt(i) == '1') {
 
-					//if carry is 1
-					if (carry.charAt(0) == '1')
-						builder.setCharAt(i, '1');
-					else
-						builder.setCharAt(i, '0');
+                    //if carry is 1
+                    if (carry.charAt(0) == '1')
+                        builder.setCharAt(i, '1');
+                    else
+                        builder.setCharAt(i, '0');
 
-					carry = "1";
-				}
-				else{
-					if (carry.charAt(0) == '1') {
-						builder.setCharAt(i, '0');
-						carry = "1";
-					}
-					else
-						builder.setCharAt(i, '1');
-				}
-			} //end of if block of if least significant bit of a is 1
-			else{ //meaning i-th bit of a is 0
-				if (m.charAt(i) == '1'){
-					if (carry.charAt(0) == '1'){
-						builder.setCharAt(i, '0');
-						carry = "1";
-					}
-					else{
-						builder.setCharAt(i, '1');
-					}
-				}
-				else{
-					if (carry.charAt(0) == '1'){
-						builder.setCharAt(i, '1');
-					}
-					else{
-						builder.setCharAt(i, '0');
-					}
-				}
-			} //end of else block of i-th bit of a
-		} // end of for loop
-		return builder.toString();
+                    carry = "1";
+                }
+                else{
+                    if (carry.charAt(0) == '1') {
+                        builder.setCharAt(i, '0');
+                        carry = "1";
+                    }
+                    else {
+                        builder.setCharAt(i, '1');
+                        carry = "0";
+                    }
+                }
+            } //end of if block of if least significant bit of a is 1
+            else{ //meaning i-th bit of a is 0
+                if (m.charAt(i) == '1'){
+                    if (carry.charAt(0) == '1'){
+                        builder.setCharAt(i, '0');
+                        carry = "1";
+                    }
+                    else{
+                        builder.setCharAt(i, '1');
+                        carry = "0";
+                    }
+                }
+                else{
+                    if (carry.charAt(0) == '1'){
+                        builder.setCharAt(i, '1');
+                    }
+                    else{
+                        builder.setCharAt(i, '0');
+                    }
+                    carry = "0";
+                }
+            } //end of else block of i-th bit of a
+        } // end of for loop
+
+        System.out.println("Sum: " + builder.toString());
+
+        return builder.toString();
 	}
 
 	public static void performOperation(String a, String m, String mneg, String q, String qneg){
+		System.out.println("Initial state ");
+		System.out.print("A: " + a);
+		System.out.print(" Q: " + q);
+		System.out.println(" Q-1: " + qneg);
+
 		for(int i = 0; i < q.length(); i++) {
 			StringBuilder builder = new StringBuilder(q);
 			if (q.charAt(q.length() - 1) == '1') { // get the last character of q and check if it is 1
