@@ -173,7 +173,10 @@ public class SequentialMultiplier {
 			}
 
 			// first character of a will take whatever is next to it
-			builder.setCharAt(0, builder.charAt(1));
+			if (builder.length() > 1)
+				builder.setCharAt(0, builder.charAt(1));
+			else
+				builder.setCharAt(0, builder.charAt(0));
 
 			// let a take the new string
 			a = builder.toString();
