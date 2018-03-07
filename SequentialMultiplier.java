@@ -11,13 +11,20 @@ public class SequentialMultiplier {
 		do {
 			System.out.print("Please enter the binary multiplicand: ");
 			multiplicand = sc.nextLine();
-		} while(!checkString(multiplicand));
+			
+			if (multiplicand.length() <= 0)
+				System.out.println("Null input.");
+			
+		} while(!checkString(multiplicand) || multiplicand.length() <= 0);
 		
 		// getting binary input for multiplier
 		do {
 			System.out.print("Please enter the binary multiplier: ");
 			multiplier = sc.nextLine();
-		} while(!checkString(multiplier));
+			
+			if (multiplicand.length() <= 0)
+				System.out.println("Null input.");
+		} while(!checkString(multiplier) || multiplier.length() <= 0);
 
 		int i = 0;
 		StringBuilder builder = new StringBuilder();
@@ -191,5 +198,4 @@ public class SequentialMultiplier {
 		//display final result
 		System.out.println("Final result: " + a + q);
 		}
-	}
 }
